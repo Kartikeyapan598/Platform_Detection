@@ -5,7 +5,12 @@ bin-release/
 [Bb]in/
 
 # Other files and folders
+*.user
+
+.git/
+.vs/
 .settings/
+
 
 # Executables
 *.swf
