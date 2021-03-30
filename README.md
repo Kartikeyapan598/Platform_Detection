@@ -1,6 +1,7 @@
 # Platform_Detection
 
-Compile Time Platform detections and utilities
+Compile Time Platform detections and utilities-
+
 	*`Compiler.h`
 	Compiler Detection Macros
 	-macros:
