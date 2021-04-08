@@ -14,8 +14,11 @@ namespace Detection
 #elif defined(_MSC_VER)
 	#define COMPILER_MSVC
 
-#elif defined(__GNUC__)
+#elif defined(__GNUC__) || defined(__GNUG__)
 	#define COMPILER_GNUC
+
+#else 
+	#define COMPILER_OTHER
 
 #endif
 
