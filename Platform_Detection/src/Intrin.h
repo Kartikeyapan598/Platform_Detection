@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 
 #if defined (_MSC_VER)
 #include <intrin.h>
@@ -8,77 +9,104 @@
 
 namespace Detection
 {
-
-#if defined(__MMX__)
-	#define INTRIN_MMX
+	void GetProcessorType(std::string& type)
+	{
+		type.erase();
+#if defined	_M_AMD64
+		type.append("x64");
+#elif defined _M_IX86
+		type.append("x86");
+#elif defined _M_ARM
+	#if defined _M_ARM64
+		type.append("64-bit ARM");
+	#else
+		type.append("Not 64-bit ARM");
+	#endif
+#else 
+		type.append("Not Defined");
 #endif
+		type.append("\n");
+	}
 
-#if defined(__AES__)
-	#define INTRIN_AES
+	void GetFloatingCapability(std::string& str)
+	{
+		str.erase();
+
+#ifdef _M_IX86_FP
+	#if defined(__MMX__)
+		str.append("__MMX__, ");
+	#endif
+	
+	#if defined(__AES__)
+		str.append("__AES__, ");
+	#endif
+	
+	#if defined(__FMA__)
+		str.append("__FMA__, ");
+	#endif
+	
+	#if defined(__SSE__)
+		str.append("__SSE__, ");
+	#endif
+	
+	#if defined(__SSE2__)
+		str.append("__SSE__2, ");
+	#endif
+	
+	#if defined(__SSE3__)
+		str.append("__SSE3__, ");
+	#endif
+	
+	#if defined(__SSSE3__)
+		str.append("__SSSE3__, ");
+	#endif
+	
+	#if defined(__SSE4_1__)
+		str.append("__SSE4_1__, ");
+	#endif
+	
+	#if defined(__SSE4_2__)
+		str.append("__SSE4_2__, ");
+	#endif
+	
+	#if defined(__AVX__)
+		str.append("__AVX__, ");
+	#endif
+	
+	#if defined(__AVX2__)
+		str.append("__AVX2__, ");
+	#endif
+	
+	#if defined(__AVX512F__) // Foundation
+		str.append("__AVX512F__, ");
+	#endif
+	
+	#if defined(__AVX512DQ__) // Double Word and Quadword
+		str.append("__AVX512DQ__, ");
+	#endif
+	
+	#if defined(__AVX512BW__) // Byte and Word
+		str.append("__AVX512BW__, ");
+	#endif
+	
+	#if defined(__AVX512CD__) // Conflict Detection
+		str.append("__AVX512CD__, ");
+	#endif
+	
+	#if defined(__AVX512ER__) // Exponential and Reciprocal
+		str.append("__AVX512ER__, ");
+	#endif
+	
+	#if defined(__AVX512PF__) // Prefetch Instructions
+		str.append("__AVX512PF__, ");
+	#endif
+	
+	#if defined(__AVX512VL__) // Vector Length
+		str.append("__AVX512VL__, ");
+	#endif
+#else
+		str.append("processor x64 type");
 #endif
-
-#if defined(__FMA__)
-	#define INTRIN_FMA
-#endif
-
-#if defined(__SSE__)
-	#define INTRIN_SSE
-#endif
-
-#if defined(__SSE2__)
-	#define INTRIN_SSE2
-#endif
-
-#if defined(__SSE3__)
-	#define INTRIN_SSE3
-#endif
-
-#if defined(__SSSE3__)
-	#define INTRIN_SSSE3
-#endif
-
-#if defined(__SSE4_1__)
-	#define INTRIN_SSE4_1
-#endif
-
-#if defined(__SSE4_2__)
-	#define INTRIN_SSE4_2
-#endif
-
-#if defined(__AVX__)
-	#define INTRIN_AVX
-#endif
-
-#if defined(__AVX2__)
-	#define INTRIN_AVX2
-#endif
-
-#if defined(__AVX512F__) // Foundation
-	#define INTRIN_AVX512
-#endif
-
-#if defined(__AVX512DQ__) // Double Word and Quadword
-	#define INTRIN_AVX512DQ
-#endif
-
-#if defined(__AVX512BW__) // Byte and Word
-	#define INTRIN_AVX512BW
-#endif
-
-#if defined(__AVX512CD__) // Conflict Detection
-	#define INTRIN_AVX512CD
-#endif
-
-#if defined(__AVX512ER__) // Exponential and Reciprocal
-#define INTRIN_AVX512ER
-#endif
-
-#if defined(__AVX512PF__) // Prefetch Instructions
-	#define INTRIN_AVX512PF
-#endif
-
-#if defined(__AVX512VL__) // Vector Length
-	#define INTRIN_AVX512VL
-#endif
-
+		str.append("\n");
+	}
 }

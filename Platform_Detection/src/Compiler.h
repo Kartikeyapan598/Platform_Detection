@@ -1,25 +1,28 @@
 #pragma once
-
-// Compiler Detection 
+#include <string>
+// Compiler Detection
 
 namespace Detection
 {
-
+	void GetCompilerType(std::string& compiler)
+	{
+		compiler.erase();
 #if defined(__clang__)
-	#define COMPILER_CLANG
-
+		compiler.append("Clang");
+		#define CLANG
 #elif defined(__INTEL_COMPILER)
-	#define COMPILER_INTEL
-
+		compiler.append("Intel Compiler");
+		#define INTEL
 #elif defined(_MSC_VER)
-	#define COMPILER_MSVC
-
+		compiler.append("MSVC");
+		#define MSVC
 #elif defined(__GNUC__) || defined(__GNUG__)
-	#define COMPILER_GNUC
-
+		compiler.append("GNU Compiler");
+		#define GNU
 #else 
-	#define COMPILER_OTHER
-
+		compiler = "undefined";
+		#define CompilerError
 #endif
-
+		compiler.append("\n");
+	}
 }
